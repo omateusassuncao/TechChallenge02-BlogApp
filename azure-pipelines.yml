@@ -8,8 +8,7 @@ trigger:
 
 #pool:
 #  vmImage: ubuntu-latest
-pool:
-  name: local
+pool: MyPool
 
 steps:
 - script: echo Hello, world!
