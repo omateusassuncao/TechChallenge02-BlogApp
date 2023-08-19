@@ -7,9 +7,10 @@ trigger:
 - master
 
 #pool:
-#  vmImage: 'windows-latest'
 
-pool: default
+pool: 
+# default
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -30,11 +31,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-#Não há configuração de testes nesse projeto
-#- task: VSTest@2
-#  inputs:
-#    platform: '$(buildPlatform)'
-#    configuration: '$(buildConfiguration)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 
 
