@@ -14,25 +14,14 @@ html {
   min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-    background-color: #000000;
-}
-
-.card {
-    background-color: #000000;
-    border-color: #fff;
-    height: 300px;
-}
-
-p, h1, h2, h3, h4, h5, h6, h7{
+p, h1, h2, h3, h4, h5, h6, h7 {
     color: #f0f0f0;
 }
 
-img{
+.text-center {
     padding: 10px;
 }
 
-.text-center{
-    padding:10px;
+body{
+    background-color: #000000;
 }
