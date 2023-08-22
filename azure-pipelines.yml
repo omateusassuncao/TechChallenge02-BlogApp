@@ -9,8 +9,8 @@ trigger:
 #pool:
 
 pool: 
-  default
-#  vmImage: 'windows-latest'
+#  default
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.csproj'
