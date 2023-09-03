@@ -13,14 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
 //Connection SQL Server DB
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(connectionString));
 
 //HttpRequest Services
 builder.Services.AddControllers();
-builder.Services.AddScoped<Repository>();
+builder.Services.AddScoped<NoticiaController>();
+builder.Services.AddTransient<Repository>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -61,8 +61,6 @@ builder.Services.AddSwaggerGen(c =>
 //});
 
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -74,17 +72,19 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notícias Power Platform v1");
-});
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+//cors
+//app.UseCors("CorsPolicy-public");
+//app.UseAuthorization();
 
 app.MapRazorPages();
 

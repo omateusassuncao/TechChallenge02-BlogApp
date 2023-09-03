@@ -12,16 +12,19 @@ namespace BlogRealProblems.Controller
     [Route("[controller]")]
     public class NoticiaController : ControllerBase
     {
+        private readonly ILogger<NoticiaController> _logger;
 
         private readonly Repository _repository;
         //private readonly Guid _usuarioId;
 
-        public NoticiaController(Repository repository)
+        public NoticiaController(ILogger<NoticiaController> logger, Repository repository)
         {
+            _logger = logger;
             _repository = repository;
         }
 
         [HttpGet("{id}")]
+        //[Route("NoticiaById")]
         [SwaggerOperation(Summary = "Noticia por Id", Description = "Retorna a respectiva notícia pelo Id")]
         public IActionResult NoticiaById(int id)
         {
@@ -36,6 +39,7 @@ namespace BlogRealProblems.Controller
         }
 
         [HttpPost]
+        //[Route("/NovaNoticia")]
         [SwaggerOperation(Summary = "Salvar noticia", Description = "Solicita a criação da noticia no DB")]
         //public async Task<IActionResult> NewNoticia(string titulo, string descricao, string chapeu, /*DateTime dataPublicacao,*/ string autor)
         public async Task<IActionResult> NewNoticia([FromBody] Noticia noticia)
@@ -62,6 +66,7 @@ namespace BlogRealProblems.Controller
         }
 
         [HttpGet]
+        //[Route("/Notiicias")]
         [SwaggerOperation(Summary = "Todas as notícias", Description = "Retorna todas as notícias disponíveis")]
         public IActionResult GetNoticias()
         {
