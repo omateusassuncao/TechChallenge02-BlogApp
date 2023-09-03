@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Builder;
 using BlogRealProblems.Models;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,10 @@ builder.Services.AddScoped<Repository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoticiasPowerPlatform", Version = "v1" });
+});
 
 
 ////cors
@@ -41,19 +45,19 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddAuthentication(x =>
 //{
-//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 //}).AddJwtBearer(x =>
 //{
-//    x.RequireHttpsMetadata = false;
-//    x.SaveToken = true;
-//    x.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateIssuerSigningKey = true,
-//        IssuerSigningKey = new SymmetricSecurityKey(key),
-//        ValidateIssuer = false,
-//        ValidateAudience = false
-//    };
+//x.RequireHttpsMetadata = false;
+//x.SaveToken = true;
+//x.TokenValidationParameters = new TokenValidationParameters
+//{
+//    ValidateIssuerSigningKey = true,
+//    IssuerSigningKey = new SymmetricSecurityKey(key),
+//    ValidateIssuer = false,
+//    ValidateAudience = false
+//};
 //});
 
 
@@ -67,26 +71,13 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-
-    app.UseSwagger();
-    app.UseSwaggerUI(
-        options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-            options.RoutePrefix = string.Empty;
-        }
-    );
-
-    // Se você também estiver usando controladores MVC, pode adicionar rotas para eles aqui
-    //app.UseEndpoints(endpoints =>
-    //{
-    //    endpoints.MapControllerRoute(
-    //        name: "default",
-    //        pattern: "{controller=Noticia}/{action=Index}/{id?}");
-    //});
-
-
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notícias Power Platform v1");
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

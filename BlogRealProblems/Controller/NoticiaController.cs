@@ -25,9 +25,9 @@ namespace BlogRealProblems.Controller
         [SwaggerOperation(Summary = "Noticia por Id", Description = "Retorna a respectiva notícia pelo Id")]
         public IActionResult NoticiaById(int id)
         {
-            var usuarioId = obterUsuarioId();
+            //var usuarioId = obterUsuarioId();
 
-            if (usuarioId == null) return Unauthorized();
+            //if (usuarioId == null) return Unauthorized();
 
             Noticia noticia = _repository.GetNoticiaById(id);
 
@@ -37,16 +37,20 @@ namespace BlogRealProblems.Controller
 
         [HttpPost]
         [SwaggerOperation(Summary = "Salvar noticia", Description = "Solicita a criação da noticia no DB")]
-        public async Task<IActionResult> NewNoticia(string titulo, string descricao, string chapeu, /*DateTime dataPublicacao,*/ string autor)
+        //public async Task<IActionResult> NewNoticia(string titulo, string descricao, string chapeu, /*DateTime dataPublicacao,*/ string autor)
+        public async Task<IActionResult> NewNoticia([FromBody] Noticia noticia)
+
         {
 
             try
             {
-                var usuarioId = obterUsuarioId();
+                //var usuarioId = obterUsuarioId();
 
-                if (usuarioId == null) return Unauthorized();
+                //if (usuarioId == null) return Unauthorized();
 
-                var resultado = await _repository.AddNoticia(new Noticia(titulo, descricao, chapeu, autor));
+                //var resultado = await _repository.AddNoticia(new Noticia(titulo, descricao, chapeu, autor));
+                var resultado = await _repository.AddNoticia(noticia);
+
                 return Ok(resultado);
 
             }
@@ -63,9 +67,9 @@ namespace BlogRealProblems.Controller
         {
             try
             {
-                var usuarioId = obterUsuarioId();
+                //var usuarioId = obterUsuarioId();
 
-                if (usuarioId == null) return Unauthorized();
+                //if (usuarioId == null) return Unauthorized();
 
                 IEnumerable<Noticia> noticias = _repository.GetNoticias();
 

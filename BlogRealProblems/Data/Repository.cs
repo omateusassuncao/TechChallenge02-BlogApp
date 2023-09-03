@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BlogRealProblems.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogRealProblems.Models
 {
