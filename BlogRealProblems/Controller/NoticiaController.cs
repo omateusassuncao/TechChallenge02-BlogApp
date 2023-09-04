@@ -57,7 +57,7 @@ namespace BlogRealProblems.Controller
                 return Ok(resultado);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NoContent();
             }
@@ -79,7 +79,7 @@ namespace BlogRealProblems.Controller
 
                 return Ok(noticias);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NoContent();
             }
@@ -90,7 +90,7 @@ namespace BlogRealProblems.Controller
         //[Route("/NovaNoticia")]
         [SwaggerOperation(Summary = "Deletar noticia", Description = "Solicita a deleção da noticia no DB")]
         //public async Task<IActionResult> NewNoticia(string titulo, string descricao, string chapeu, /*DateTime dataPublicacao,*/ string autor)
-        public async Task<IActionResult> DeleteNoticia(int id)
+        public IActionResult DeleteNoticia(int id)
         {
 
             try
@@ -100,25 +100,25 @@ namespace BlogRealProblems.Controller
                 //if (usuarioId == null) return Unauthorized();
 
                 //var resultado = await _repository.AddNoticia(new Noticia(titulo, descricao, chapeu, autor));
-                var resultado = await _repository.DeleteNoticia(id);
+                var resultado = _repository.DeleteNoticia(id);
                 return Ok(resultado);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NoContent();
             }
 
         }
 
-        private Guid obterUsuarioId()
-        {
-            var usuarioId = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+        //private Guid obterUsuarioId()
+        //{
+        //    var usuarioId = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
 
-            if (usuarioId == null) return Guid.Empty;
+        //    if (usuarioId == null) return Guid.Empty;
 
-            return new Guid(usuarioId);
-        }
+        //    return new Guid(usuarioId);
+        //}
 
 
     }

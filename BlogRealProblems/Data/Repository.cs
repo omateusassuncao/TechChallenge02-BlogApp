@@ -25,13 +25,13 @@ namespace BlogRealProblems.Models
                 if (noticiaResultado == null) throw new Exception("Nova NotÍcia não encontrada");
                 return noticiaResultado;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
-        public async Task<Noticia> DeleteNoticia(int id)
+        public Noticia DeleteNoticia(int id)
         {
             try
             {
@@ -43,9 +43,9 @@ namespace BlogRealProblems.Models
                 if (noticiaResultado != null) throw new Exception("Nova não foi deletada");
                 return noticia;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -53,13 +53,13 @@ namespace BlogRealProblems.Models
         {
             try
             {
-                Noticia noticia = context.Noticias.FirstOrDefault(f => f.Id == id);
+                Noticia? noticia = context.Noticias.FirstOrDefault(f => f.Id == id);
                 if (noticia == null) throw new Exception("Noticia não encontrada");
                 return noticia;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -70,9 +70,9 @@ namespace BlogRealProblems.Models
                 IEnumerable<Noticia> noticias = context.Noticias;
                 return noticias;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 

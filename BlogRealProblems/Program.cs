@@ -86,6 +86,8 @@ app.UseEndpoints(endpoints =>
 //app.UseCors("CorsPolicy-public");
 //app.UseAuthorization();
 
+app.UseStaticFiles();
+
 app.MapRazorPages();
 
 app.Run();
