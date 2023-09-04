@@ -43,7 +43,6 @@ namespace BlogRealProblems.Controller
         [SwaggerOperation(Summary = "Salvar noticia", Description = "Solicita a criação da noticia no DB")]
         //public async Task<IActionResult> NewNoticia(string titulo, string descricao, string chapeu, /*DateTime dataPublicacao,*/ string autor)
         public async Task<IActionResult> NewNoticia([FromBody] Noticia noticia)
-
         {
 
             try
@@ -60,7 +59,7 @@ namespace BlogRealProblems.Controller
             }
             catch (Exception e)
             {
-                return null;
+                return NoContent();
             }
 
         }
@@ -82,8 +81,34 @@ namespace BlogRealProblems.Controller
             }
             catch (Exception e)
             {
-                return null;
+                return NoContent();
             }
+        }
+
+
+        [HttpDelete("{id}")]
+        //[Route("/NovaNoticia")]
+        [SwaggerOperation(Summary = "Deletar noticia", Description = "Solicita a deleção da noticia no DB")]
+        //public async Task<IActionResult> NewNoticia(string titulo, string descricao, string chapeu, /*DateTime dataPublicacao,*/ string autor)
+        public async Task<IActionResult> DeleteNoticia(int id)
+        {
+
+            try
+            {
+                //var usuarioId = obterUsuarioId();
+
+                //if (usuarioId == null) return Unauthorized();
+
+                //var resultado = await _repository.AddNoticia(new Noticia(titulo, descricao, chapeu, autor));
+                var resultado = await _repository.DeleteNoticia(id);
+                return Ok(resultado);
+
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+
         }
 
         private Guid obterUsuarioId()

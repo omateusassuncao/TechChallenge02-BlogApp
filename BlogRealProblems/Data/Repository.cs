@@ -1,4 +1,5 @@
 ﻿using BlogRealProblems.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogRealProblems.Models
@@ -30,14 +31,17 @@ namespace BlogRealProblems.Models
             }
         }
 
-        public void DeleteNoticia(int id)
+        public async Task<Noticia> DeleteNoticia(int id)
         {
             try
             {
                 Noticia noticia = GetNoticiaById(id);
-                if (noticia == null)
-                    context.Noticias.Remove(noticia);
+                if (noticia == null) throw new Exception("Nova NotÍcia não encontrada");
+                context.Noticias.Remove(noticia);
                 context.SaveChanges();
+                Noticia noticiaResultado = GetNoticiaById(id);
+                if (noticiaResultado != null) throw new Exception("Nova não foi deletada");
+                return noticia;
             }
             catch (Exception e)
             {
