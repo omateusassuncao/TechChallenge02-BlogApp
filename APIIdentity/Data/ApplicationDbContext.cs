@@ -17,13 +17,7 @@ namespace APIIdentity.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario
-                {
-                    Id = 1,
-                    Nome = "Mateus",
-                    Email = "mateusvassuncao@gmail.com",
-                    Idade = 30,
-                });
+                new Usuario(1, "Mateus","mateusvassuncao@gmail.com",30));
         }
     }
 }

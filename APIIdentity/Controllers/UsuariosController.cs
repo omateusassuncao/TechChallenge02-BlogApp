@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using APIIdentity.Data;
 using APIIdentity.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace APIIdentity.Controllers
 {
-    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly ApplicationDbContext _context;
