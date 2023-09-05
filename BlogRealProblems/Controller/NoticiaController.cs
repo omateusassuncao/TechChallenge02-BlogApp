@@ -1,4 +1,5 @@
 ﻿using BlogRealProblems.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -6,8 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace BlogRealProblems.Controller
 {
-
-
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class NoticiaController : ControllerBase
@@ -63,7 +63,7 @@ namespace BlogRealProblems.Controller
             }
 
         }
-
+        
         [HttpGet]
         //[Route("/Notiicias")]
         [SwaggerOperation(Summary = "Todas as notícias", Description = "Retorna todas as notícias disponíveis")]

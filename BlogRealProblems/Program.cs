@@ -1,12 +1,9 @@
 using BlogRealProblems.Controller;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Builder;
 using BlogRealProblems.Models;
 using Microsoft.OpenApi.Models;
+
+using APIIdentity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +13,7 @@ builder.Services.AddRazorPages();
 //Connection SQL Server DB
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(connectionString));
+
 
 //HttpRequest Services
 builder.Services.AddControllers();
@@ -29,36 +27,6 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoticiasPowerPlatform", Version = "v1" });
 });
-
-
-////cors
-//var politica = "CorsPolicy-public";
-
-//builder.Services.AddCors(option => option.AddPolicy(politica, builder => builder.WithOrigins("http://localhost:4200", "https://localhost")
-//     .AllowAnyMethod()
-//                .AllowAnyHeader()
-//                .AllowCredentials()
-//                .Build()));
-
-////authentication
-//var key = Encoding.ASCII.GetBytes("1f1ce09a-0b07-4fd8-889e-e3e18442b081");
-
-//builder.Services.AddAuthentication(x =>
-//{
-//x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(x =>
-//{
-//x.RequireHttpsMetadata = false;
-//x.SaveToken = true;
-//x.TokenValidationParameters = new TokenValidationParameters
-//{
-//    ValidateIssuerSigningKey = true,
-//    IssuerSigningKey = new SymmetricSecurityKey(key),
-//    ValidateIssuer = false,
-//    ValidateAudience = false
-//};
-//});
 
 
 var app = builder.Build();
@@ -81,10 +49,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
-//cors
-//app.UseCors("CorsPolicy-public");
-//app.UseAuthorization();
 
 app.UseStaticFiles();
 
